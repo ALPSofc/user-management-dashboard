@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { AppProviders } from "@/app/providers/AppProviders";
 import { worker } from "@/mocks/browser";
+import App from "./App";
 
 async function enableMocking() {
-  // liga MSW no dev OU quando você setar a env var no deploy
   const shouldMock =
     import.meta.env.DEV || import.meta.env.VITE_ENABLE_MSW === "true";
 
@@ -17,10 +17,15 @@ async function enableMocking() {
   }
 }
 
-enableMocking().then(() => {
-  ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-      <AppProviders />
-    </React.StrictMode>
-  );
-});
+enableMocking();
+
+const Providers = AppProviders as unknown as React.ComponentType<{ children?: React.ReactNode }>;
+
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+root.render(
+  <React.StrictMode>
+    <Providers>
+      <App />
+    </Providers>
+  </React.StrictMode>
+);
