@@ -13,20 +13,26 @@ type FormData = z.infer<typeof schema>;
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const form = useForm<FormData>({ resolver: zodResolver(schema), defaultValues: {
-    email: "admin@demo.com",
-    password: "admin123",
-  }});
+  const form = useForm<FormData>({
+    resolver: zodResolver(schema), defaultValues: {
+      email: "admin@demo.com",
+      password: "admin123",
+    }
+  });
 
   async function onSubmit(values: FormData) {
-    try {
-      const { data } = await axios.post<{ token: string }>("/api/login", values);
-      storage.setToken(data.token);
+    if (
+      values.email === "admin@demo.com" &&
+      values.password === "admin123"
+    ) {
+      storage.setToken("demo-token");
       navigate("/", { replace: true });
-    } catch (e) {
-      form.setError("root", { message: "Invalid email or password." });
+      return;
     }
+
+    form.setError("root", { message: "Invalid email or password." });
   }
+
 
   return (
     <div className="min-h-screen grid place-items-center p-4">
