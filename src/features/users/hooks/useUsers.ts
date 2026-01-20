@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createUser, deleteUser, fetchUsers, updateUser } from "../api/usersApi";
-import type { UsersListResponse } from "../api/usersApi";
+import {
+  fetchUsersLocal as fetchUsers,
+  createUserLocal as createUser,
+  updateUserLocal as updateUser,
+  deleteUserLocal as deleteUser,
+} from "../api/usersApi.ts";
+import type { UsersListResponse } from "../api/usersApi.ts";
 
 export function useUsers(params: {
   page: number;
