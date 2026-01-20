@@ -6,7 +6,7 @@ The project focuses on **real-world frontend challenges** such as authentication
 ---
 
 ## 🔗 Demo
-> https://user-management-dashboard.vercel.app
+> https://user-management-dashboard-alps.vercel.app
 
 **Demo credentials**
 - Email: `admin@demo.com`
