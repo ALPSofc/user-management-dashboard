@@ -47,7 +47,6 @@ export function useUsers(params: {
     },
 
     onError: (_err, _id, ctx) => {
-      // rollback
       ctx?.previous?.forEach(([key, data]) => {
         qc.setQueryData(key, data);
       });
